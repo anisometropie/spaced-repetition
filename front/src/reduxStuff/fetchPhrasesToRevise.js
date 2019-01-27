@@ -1,42 +1,38 @@
 import { api } from 'reduxStuff/api'
 
-export const ADD_PHRASES_PENDING = 'ADD_PHRASES_PENDING'
-export const ADD_PHRASES_SUCCESS = 'ADD_PHRASES_SUCCESS'
-export const ADD_PHRASES_FAILED = 'ADD_PHRASES_FAILED'
+export const FETCH_PHRASES_TO_REVISE_PENDING = 'FETCH_PHRASES_TO_REVISE_PENDING'
+export const FETCH_PHRASES_TO_REVISE_SUCCESS = 'FETCH_PHRASES_TO_REVISE_SUCCESS'
+export const FETCH_PHRASES_TO_REVISE_FAILED = 'FETCH_PHRASES_TO_REVISE_FAILED'
 
-const initialState = { status: '' }
+const initialState = { requestStatus: '' }
 
-export const addPhrasesAction = (
+export const fetchPhrasesToReviseAction = (
   newPhrases,
   translations,
   initialEaseFactor,
   firstRepetitionInterval
 ) => dispatch => {
-  dispatch({ type: ADD_PHRASES_PENDING })
+  dispatch({ type: FETCH_PHRASES_TO_REVISE_PENDING })
   api
-    .addPhrases({
-      newPhrases,
-      translations,
-      initialEaseFactor,
-      firstRepetitionInterval,
-    })
+    .fetchPhrasesToRevise(10)
     .then(res => res.json())
     .then(data => {
-      dispatch({ type: ADD_PHRASES_SUCCESS })
+      console.log(data)
+      dispatch({ type: FETCH_PHRASES_TO_REVISE_SUCCESS })
     })
     .catch(err => {
-      dispatch({ type: ADD_PHRASES_FAILED })
+      dispatch({ type: FETCH_PHRASES_TO_REVISE_FAILED })
     })
 }
 
-export const addPhrases = (state = initialState, action) => {
+export const phrasesToRevise = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_PHRASES_PENDING:
-      return { ...state, status: 'pending' }
-    case ADD_PHRASES_SUCCESS:
-      return { ...state, status: 'success' }
-    case ADD_PHRASES_FAILED:
-      return { ...state, status: 'failed' }
+    case FETCH_PHRASES_TO_REVISE_PENDING:
+      return { ...state, requestStatus: 'pending' }
+    case FETCH_PHRASES_TO_REVISE_SUCCESS:
+      return { ...state, requestStatus: 'success' }
+    case FETCH_PHRASES_TO_REVISE_FAILED:
+      return { ...state, requestStatus: 'failed' }
     default:
       return state
   }

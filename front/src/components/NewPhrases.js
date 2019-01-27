@@ -5,7 +5,7 @@ import './styles/NewPhrases.css'
 
 //FROM CONFIG JSON
 const easeFactor = 2.5
-const firstRepetitionInterval = 0
+const firstRepetitionInterval = 1
 
 const defaultState = {
   russianSentences: '',

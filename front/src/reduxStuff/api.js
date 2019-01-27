@@ -11,4 +11,5 @@ export const apiCall = (request, requestType) => body =>
 
 export const api = {
   addPhrases: apiCall('addPhrases', 'POST'),
+  fetchPhrasesToRevise: apiCall('fetchPhrasesToRevise', 'GET'),
 }
