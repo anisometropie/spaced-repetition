@@ -16,9 +16,15 @@ class Revise extends React.Component {
 
   ComponentDidMount() {}
 
+  fetchPhrasesToRevise = () => {
+    this.props.dispatch(
+      fetchPhrasesToReviseAction(defaultNumberOfPhraseToRevise)
+    )
+  }
+
   render() {
     return <button onclick={this.fetchPhrasesToRevise} />
   }
 }
 
-export default connect()(NewPhrases)
+export default connect()(Revise)
