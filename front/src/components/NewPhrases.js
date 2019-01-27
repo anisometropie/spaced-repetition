@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { addPhrasesAction } from 'reduxStuff/addPhrases'
 import './styles/NewPhrases.css'
 
+//FROM CONFIG JSON
+const easeFactor = 2.5
+const firstRepetitionInterval = 0
+
 const defaultState = {
   russianSentences: '',
   englishSentences: '',
 }
+
 class NewPhrases extends React.Component {
   constructor(props) {
     super(props)
@@ -31,7 +36,9 @@ class NewPhrases extends React.Component {
     this.props.dispatch(
       addPhrasesAction(
         russianSentences.split(/\n/),
-        englishSentences.split(/\n/)
+        englishSentences.split(/\n/),
+        easeFactor,
+        firstRepetitionInterval
       )
     )
   }
