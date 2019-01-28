@@ -5,7 +5,7 @@ const handleAddPhrases = knex => (req, res) => {
     newPhrases,
     translations,
     initialEaseFactor,
-    firstRepetitionInterval,
+    firstRepetitionInterval
   } = req.body
   let response = {}
   if (!isArray(newPhrases) || !isArray(translations)) {
@@ -24,7 +24,7 @@ const handleAddPhrases = knex => (req, res) => {
         username: 'none',
         ease_factor: initialEaseFactor,
         next_repetition,
-        number_of_repetition: 0,
+        number_of_repetition: 0
       }
     })
     knex

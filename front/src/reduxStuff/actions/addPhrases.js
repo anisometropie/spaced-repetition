@@ -4,7 +4,7 @@ export const ADD_PHRASES_PENDING = 'ADD_PHRASES_PENDING'
 export const ADD_PHRASES_SUCCESS = 'ADD_PHRASES_SUCCESS'
 export const ADD_PHRASES_FAILED = 'ADD_PHRASES_FAILED'
 
-const initialState = { status: '' }
+const initialState = { requestStatus: '' }
 
 export const addPhrasesAction = (
   newPhrases,
@@ -32,11 +32,11 @@ export const addPhrasesAction = (
 export const addPhrases = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PHRASES_PENDING:
-      return { ...state, status: 'pending' }
+      return { ...state, requestStatus: 'pending' }
     case ADD_PHRASES_SUCCESS:
-      return { ...state, status: 'success' }
+      return { ...state, requestStatus: 'success' }
     case ADD_PHRASES_FAILED:
-      return { ...state, status: 'failed' }
+      return { ...state, requestStatus: 'failed' }
     default:
       return state
   }

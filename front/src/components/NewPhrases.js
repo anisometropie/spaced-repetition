@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addPhrasesAction } from 'reduxStuff/addPhrases'
+import { addPhrasesAction } from 'reduxStuff/actions/addPhrases'
 import './styles/NewPhrases.css'
 
 //FROM CONFIG JSON
 const easeFactor = 2.5
-const firstRepetitionInterval = 1
+const firstRepetitionInterval = 0
 
 const defaultState = {
   russianSentences: '',

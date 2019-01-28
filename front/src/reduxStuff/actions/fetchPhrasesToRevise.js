@@ -6,19 +6,16 @@ export const FETCH_PHRASES_TO_REVISE_FAILED = 'FETCH_PHRASES_TO_REVISE_FAILED'
 
 const initialState = { requestStatus: '' }
 
-export const fetchPhrasesToReviseAction = (
-  newPhrases,
-  translations,
-  initialEaseFactor,
-  firstRepetitionInterval
-) => dispatch => {
+export const fetchPhrasesToReviseAction = numberOfPhrases => dispatch => {
   dispatch({ type: FETCH_PHRASES_TO_REVISE_PENDING })
   api
-    .fetchPhrasesToRevise(10)
+    .fetchPhrasesToRevise()
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      dispatch({ type: FETCH_PHRASES_TO_REVISE_SUCCESS })
+      dispatch({
+        type: FETCH_PHRASES_TO_REVISE_SUCCESS,
+        payload: { phrases: data },
+      })
     })
     .catch(err => {
       dispatch({ type: FETCH_PHRASES_TO_REVISE_FAILED })
@@ -30,7 +27,11 @@ export const phrasesToRevise = (state = initialState, action) => {
     case FETCH_PHRASES_TO_REVISE_PENDING:
       return { ...state, requestStatus: 'pending' }
     case FETCH_PHRASES_TO_REVISE_SUCCESS:
-      return { ...state, requestStatus: 'success' }
+      return {
+        ...state,
+        phrases: action.payload.phrases,
+        requestStatus: 'success',
+      }
     case FETCH_PHRASES_TO_REVISE_FAILED:
       return { ...state, requestStatus: 'failed' }
     default:

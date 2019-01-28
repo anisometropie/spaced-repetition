@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchPhrasesToReviseAction } from 'reduxStuff/fetchPhrasesToRevise'
-import './styles/NewPhrases.css'
+import { fetchPhrasesToReviseAction } from 'reduxStuff/actions/fetchPhrasesToRevise'
+import './styles/Revise.css'
 
 //FROM CONFIG JSON
 const defaultNumberOfPhraseToRevise = 10
@@ -14,7 +14,9 @@ class Revise extends React.Component {
     this.state = defaultState
   }
 
-  ComponentDidMount() {}
+  ComponentDidMount() {
+    this.fetchPhrasesToRevise()
+  }
 
   fetchPhrasesToRevise = () => {
     this.props.dispatch(
@@ -23,7 +25,7 @@ class Revise extends React.Component {
   }
 
   render() {
-    return <button onclick={this.fetchPhrasesToRevise} />
+    return <button onClick={this.fetchPhrasesToRevise} />
   }
 }
 
