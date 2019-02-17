@@ -9,7 +9,7 @@ const firstRepetitionInterval = 0
 
 const defaultState = {
   russianSentences: '',
-  englishSentences: '',
+  englishSentences: ''
 }
 
 class NewPhrases extends React.Component {
@@ -20,13 +20,13 @@ class NewPhrases extends React.Component {
 
   handleRussianChange = event => {
     this.setState({
-      russianSentences: event.target.value,
+      russianSentences: event.target.value
     })
   }
 
   handleEnglishChange = event => {
     this.setState({
-      englishSentences: event.target.value,
+      englishSentences: event.target.value
     })
   }
 
