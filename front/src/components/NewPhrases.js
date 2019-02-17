@@ -1,7 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addPhrasesAction } from 'reduxStuff/actions/addPhrases'
+import {
+  addPhrasesAction,
+  selectors as addPhrasesSelectors
+} from 'reduxStuff/actions/addPhrases'
 import './styles/NewPhrases.css'
+import { isEmpty } from 'lodash'
 
 //FROM CONFIG JSON
 const easeFactor = 2.5
@@ -44,6 +48,17 @@ class NewPhrases extends React.Component {
   }
 
   render() {
+    const { requestStatus, message, added, alreadyExisting } = this.props
+    const addedPhrasesJSX = added.map((phrase, index) => {
+      return (
+        <div key={index}>{`${phrase.original} — ${phrase.translation}`}</div>
+      )
+    })
+    const alreadyExistingPhrasesJSX = alreadyExisting.map((phrase, index) => {
+      return (
+        <div key={index}>{`${phrase.original} — ${phrase.translation}`}</div>
+      )
+    })
     return (
       <div className="newPhrasesMainContainer">
         <h1>Input new sentences</h1>
@@ -64,9 +79,24 @@ class NewPhrases extends React.Component {
           </div>
           <button onClick={this.submitPhrases}>Submit</button>
         </form>
+        <div>{message}</div>
+        <div className="phrases">{addedPhrasesJSX}</div>
+        {!isEmpty(alreadyExisting) && (
+          <div className="phrases">
+            <div>Phrases already added : </div>
+            {alreadyExistingPhrasesJSX}
+          </div>
+        )}
       </div>
     )
   }
 }
 
-export default connect()(NewPhrases)
+const mapStateToProps = state => ({
+  requestStatus: addPhrasesSelectors.getRequestStatus(state),
+  message: addPhrasesSelectors.getMessage(state),
+  added: addPhrasesSelectors.getAdded(state),
+  alreadyExisting: addPhrasesSelectors.getAlreadyExisting(state)
+})
+
+export default connect(mapStateToProps)(NewPhrases)

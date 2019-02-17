@@ -62,3 +62,17 @@ export const addPhrases = (state = initialState, action) => {
       return state
   }
 }
+
+const getState = state => state.addPhrases
+const getRequestStatus = state => getState(state).requestStatus
+const getMessage = state => getState(state).message
+const getAdded = state => getState(state).added
+const getAlreadyExisting = state => getState(state).alreadyExisting
+
+export const selectors = {
+  getState,
+  getRequestStatus,
+  getMessage,
+  getAdded,
+  getAlreadyExisting
+}
